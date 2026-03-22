@@ -1,0 +1,2260 @@
+<!-- Breakdown of the 13 color tokens used -->
+
+<!-- Backgrounds (Ink scale): 
+Three dark navy-purple tones forming the layered background system, 
+from the deepest page background #0a0a0f up through card surfaces to #2f2d4a.
+
+Accent / Brand (Purple scale): 
+The core brand color #6c47ff is used for buttons, glows, borders, and UI highlights. 
+#9b71ff is the lighter variant for gradients, and #c9b8ff (accent-glow) 
+is used on headline spans and tag text where it needs to pop on dark backgrounds.
+
+Highlight Colors: 
+Three expressive accent colors each with a distinct role: 
+#b8ff57 (lime) is used exclusively for high-contrast CTAs and AI badge labels, 
+#3cf0c5 (teal) signals success states and the logo mark gradient, 
+and #ff5f87 (rose) appears on feature icon backgrounds.
+
+Text / Muted: 
+#7b7a96 for secondary UI text like nav links and placeholder labels, 
+and #a9a8c0 for body descriptions and card content.
+
+Key Gradients: 
+Three gradients drive the visual identity: the button gradient #6c47ff → #9b71ff,
+the headline text gradient #c9b8ff → #3cf0c5, and the hero/logo mark gradient #6c47ff → #3cf0c5. -->
+
+<!-- Here are all 13 color tokens used in Lystra: -->
+
+<!-- ink: #0a0a0f
+ink-2: #1c1b2e
+ink-3: #2f2d4a
+surface: #f7f6ff
+surface-2: #edecfc
+accent: #6c47ff
+accent-2: #9b71ff
+accent-glow: #c9b8ff
+lime: #b8ff57
+teal: #3cf0c5
+rose: #ff5f87
+muted: #7b7a96
+muted-2: #a9a8c0
+white: #ffffff -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lystra — AI-Powered Product Listings & Visuals</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Reset & Base ── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --ink: #0a0a0f;
+        --ink-2: #1c1b2e;
+        --ink-3: #2f2d4a;
+        --muted: #7b7a96;
+        --muted-2: #a9a8c0;
+        --surface: #f7f6ff;
+        --surface-2: #edecfc;
+        --white: #ffffff;
+        --accent: #6c47ff;
+        --accent-2: #9b71ff;
+        --accent-glow: #c9b8ff;
+        --lime: #b8ff57;
+        --teal: #3cf0c5;
+        --rose: #ff5f87;
+        --radius-sm: 8px;
+        --radius: 16px;
+        --radius-lg: 28px;
+        --radius-xl: 40px;
+        --shadow-sm: 0 2px 8px rgba(108, 71, 255, 0.1);
+        --shadow: 0 8px 32px rgba(108, 71, 255, 0.16);
+        --shadow-lg: 0 24px 64px rgba(108, 71, 255, 0.22);
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--ink);
+        color: var(--white);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        font-family: "Syne", sans-serif;
+        line-height: 1.15;
+      }
+
+      /* ── Utility ── */
+      .container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(108, 71, 255, 0.18);
+        border: 1px solid rgba(108, 71, 255, 0.35);
+        color: var(--accent-glow);
+        padding: 5px 14px;
+        border-radius: 99px;
+      }
+      .tag::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-2);
+        display: inline-block;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "Syne", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 14px 28px;
+        border-radius: 99px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: var(--transition);
+        white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent-2) 100%
+        );
+        color: var(--white);
+        box-shadow: 0 4px 24px rgba(108, 71, 255, 0.45);
+      }
+      .btn-primary::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.15),
+          transparent
+        );
+        opacity: 0;
+        transition: var(--transition);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 36px rgba(108, 71, 255, 0.6);
+      }
+      .btn-primary:hover::after {
+        opacity: 1;
+      }
+
+      .btn-ghost {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(8px);
+      }
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-1px);
+      }
+
+      .btn-lime {
+        background: var(--lime);
+        color: var(--ink);
+        box-shadow: 0 4px 20px rgba(184, 255, 87, 0.35);
+      }
+      .btn-lime:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(184, 255, 87, 0.5);
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 800;
+        line-height: 1.1;
+      }
+      .section-sub {
+        font-size: 1.05rem;
+        color: var(--muted-2);
+        max-width: 520px;
+        line-height: 1.7;
+      }
+
+      .glow-dot {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        opacity: 0.22;
+        position: absolute;
+        pointer-events: none;
+        filter: blur(2px);
+      }
+
+      /* ── Nav ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 18px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(10, 10, 15, 0.72);
+        backdrop-filter: blur(20px);
+        transition: var(--transition);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: "Syne", sans-serif;
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: var(--white);
+        text-decoration: none;
+        letter-spacing: -0.01em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo-mark {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--teal) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        font-weight: 800;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--muted-2);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: color var(--transition);
+      }
+      .nav-links a:hover {
+        color: var(--white);
+      }
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+      }
+
+      /* ── Hero ── */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 120px 0 80px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 60% 10%,
+            rgba(108, 71, 255, 0.28) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 40% at 10% 80%,
+            rgba(60, 240, 197, 0.12) 0%,
+            transparent 55%
+          ),
+          linear-gradient(180deg, var(--ink) 0%, #0d0c1d 100%);
+      }
+      .hero-grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(108, 71, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(108, 71, 255, 0.06) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black 30%,
+          transparent 100%
+        );
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .hero-badge {
+        margin-bottom: 24px;
+        animation: fadeUp 0.6s ease both;
+      }
+      .hero-headline {
+        font-size: clamp(2.4rem, 5.5vw, 4rem);
+        font-weight: 800;
+        line-height: 1.06;
+        letter-spacing: -0.02em;
+        margin-bottom: 20px;
+        animation: fadeUp 0.7s 0.1s ease both;
+      }
+      .hero-headline span {
+        background: linear-gradient(
+          100deg,
+          var(--accent-glow) 0%,
+          var(--teal) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-desc {
+        color: var(--muted-2);
+        font-size: 1.08rem;
+        line-height: 1.75;
+        max-width: 440px;
+        margin-bottom: 36px;
+        animation: fadeUp 0.7s 0.2s ease both;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        animation: fadeUp 0.7s 0.3s ease both;
+      }
+      .hero-proof {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        animation: fadeUp 0.7s 0.4s ease both;
+      }
+      .avatar-stack {
+        display: flex;
+      }
+      .avatar-stack img,
+      .avatar-stack .av {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid var(--ink);
+        margin-left: -10px;
+        background: var(--ink-3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--muted-2);
+        overflow: hidden;
+      }
+      .avatar-stack .av:first-child {
+        margin-left: 0;
+      }
+      .proof-text {
+        font-size: 0.85rem;
+        color: var(--muted-2);
+      }
+      .proof-text strong {
+        color: var(--white);
+      }
+      .stars {
+        color: #ffd700;
+        letter-spacing: 1px;
+        font-size: 0.8rem;
+      }
+
+      /* Hero Visual */
+      .hero-visual {
+        position: relative;
+        animation: fadeUp 0.8s 0.15s ease both;
+      }
+      .mockup-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        backdrop-filter: blur(16px);
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+      }
+      .mockup-card::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 24px;
+        right: 24px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+      }
+      .mockup-topbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .dot-r {
+        background: #ff5f57;
+      }
+      .dot-y {
+        background: #ffbd2e;
+      }
+      .dot-g {
+        background: #28ca41;
+      }
+      .mockup-label {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-left: auto;
+      }
+
+      .before-after {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .ba-panel {
+        border-radius: var(--radius);
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 3/4;
+      }
+      .ba-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: var(--ink-3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ba-img svg {
+        opacity: 0.3;
+      }
+      .ba-before .ba-img {
+        background: linear-gradient(160deg, #2a2540 0%, #1a1830 100%);
+        filter: saturate(0.4) brightness(0.7);
+      }
+      .ba-after .ba-img {
+        background: linear-gradient(160deg, #2d1e5c 0%, #1e1440 100%);
+        filter: saturate(1.4) brightness(1.05);
+      }
+      .ba-tag {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 3px 9px;
+        border-radius: 99px;
+      }
+      .ba-before .ba-tag {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--muted-2);
+      }
+      .ba-after .ba-tag {
+        background: var(--lime);
+        color: var(--ink);
+      }
+      .ai-badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: rgba(108, 71, 255, 0.7);
+        backdrop-filter: blur(8px);
+        border-radius: 99px;
+        padding: 3px 9px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+
+      .listing-block {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: var(--radius);
+        padding: 14px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .listing-row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .listing-key {
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--accent-2);
+        min-width: 72px;
+        padding-top: 2px;
+      }
+      .listing-val {
+        font-size: 0.82rem;
+        color: var(--muted-2);
+        line-height: 1.5;
+      }
+      .listing-val.title {
+        color: var(--white);
+        font-weight: 600;
+        font-size: 0.88rem;
+      }
+
+      .typing-cursor::after {
+        content: "|";
+        animation: blink 1s step-end infinite;
+        color: var(--accent-2);
+      }
+
+      .float-chip {
+        position: absolute;
+        padding: 8px 14px;
+        border-radius: 99px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        white-space: nowrap;
+        animation: float 4s ease-in-out infinite;
+      }
+      .chip-1 {
+        background: rgba(60, 240, 197, 0.15);
+        color: var(--teal);
+        top: -18px;
+        right: 20px;
+        animation-delay: 0s;
+      }
+      .chip-2 {
+        background: rgba(184, 255, 87, 0.12);
+        color: var(--lime);
+        bottom: 30px;
+        left: -24px;
+        animation-delay: 1.5s;
+      }
+
+      /* ── Features ── */
+      #features {
+        padding: 120px 0;
+        position: relative;
+      }
+      .features-head {
+        text-align: center;
+        margin-bottom: 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .feat-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        padding: 32px 28px;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+      }
+      .feat-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 80% 60% at 50% 0%,
+          rgba(108, 71, 255, 0.1) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: var(--transition);
+      }
+      .feat-card:hover {
+        border-color: rgba(108, 71, 255, 0.4);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+      }
+      .feat-card:hover::before {
+        opacity: 1;
+      }
+
+      .feat-card.highlight {
+        grid-column: span 2;
+        background: linear-gradient(
+          135deg,
+          rgba(108, 71, 255, 0.18) 0%,
+          rgba(60, 240, 197, 0.08) 100%
+        );
+        border-color: rgba(108, 71, 255, 0.3);
+      }
+      .feat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+      }
+      .icon-purple {
+        background: rgba(108, 71, 255, 0.2);
+      }
+      .icon-teal {
+        background: rgba(60, 240, 197, 0.15);
+      }
+      .icon-rose {
+        background: rgba(255, 95, 135, 0.15);
+      }
+      .icon-lime {
+        background: rgba(184, 255, 87, 0.12);
+      }
+      .icon-gold {
+        background: rgba(255, 184, 0, 0.12);
+      }
+
+      .feat-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .feat-desc {
+        font-size: 0.9rem;
+        color: var(--muted-2);
+        line-height: 1.65;
+      }
+      .feat-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .pill {
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 99px;
+        background: rgba(108, 71, 255, 0.15);
+        color: var(--accent-glow);
+        border: 1px solid rgba(108, 71, 255, 0.2);
+      }
+
+      /* ── How It Works ── */
+      #how {
+        padding: 120px 0;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(108, 71, 255, 0.05) 50%,
+          transparent 100%
+        );
+        position: relative;
+      }
+      .how-head {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 80px;
+      }
+      .steps-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+        align-items: start;
+        position: relative;
+      }
+      .steps-row::before {
+        content: "";
+        position: absolute;
+        top: 40px;
+        left: calc(16.66% + 8px);
+        right: calc(16.66% + 8px);
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          rgba(60, 240, 197, 0.6),
+          var(--accent)
+        );
+        opacity: 0.35;
+      }
+      .step {
+        text-align: center;
+        padding: 0 16px;
+        position: relative;
+      }
+      .step-num {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 24px;
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent-2) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Syne", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        box-shadow:
+          0 0 0 8px rgba(108, 71, 255, 0.12),
+          0 0 0 16px rgba(108, 71, 255, 0.05);
+        position: relative;
+        z-index: 1;
+      }
+      .step-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .step-desc {
+        font-size: 0.9rem;
+        color: var(--muted-2);
+        line-height: 1.65;
+      }
+
+      /* ── Showcase ── */
+      #showcase {
+        padding: 120px 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .showcase-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .showcase-label {
+        font-family: "Syne", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent-2);
+        margin-bottom: 6px;
+      }
+      .showcase-title {
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+      .showcase-desc {
+        color: var(--muted-2);
+        line-height: 1.75;
+        margin-bottom: 32px;
+      }
+      .showcase-perks {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 36px;
+      }
+      .perk {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.92rem;
+        color: var(--muted-2);
+      }
+      .perk-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: rgba(184, 255, 87, 0.12);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+      }
+
+      .ba-showcase {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .ba-s-panel {
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        position: relative;
+      }
+      .ba-s-img {
+        width: 100%;
+        aspect-ratio: 0.75;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        position: relative;
+      }
+      .ba-s-before .ba-s-img {
+        background: linear-gradient(160deg, #1e1c30, #141226);
+      }
+      .ba-s-after .ba-s-img {
+        background: linear-gradient(160deg, #231649, #0f0b2b);
+      }
+      .product-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .product-shape {
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .ba-s-before .product-shape {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px dashed rgba(255, 255, 255, 0.15);
+        filter: grayscale(1) brightness(0.5);
+      }
+      .ba-s-after .product-shape {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(108, 71, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(108, 71, 255, 0.35);
+        filter: brightness(1.2) saturate(1.3);
+      }
+      .ba-s-label {
+        position: absolute;
+        bottom: 12px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+      }
+      .ba-s-label span {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 4px 12px;
+        border-radius: 99px;
+      }
+      .ba-s-before .ba-s-label span {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--muted-2);
+      }
+      .ba-s-after .ba-s-label span {
+        background: var(--lime);
+        color: var(--ink);
+      }
+
+      .sparkle-bar {
+        position: absolute;
+        top: 16px;
+        right: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-end;
+      }
+      .sbar {
+        height: 4px;
+        border-radius: 2px;
+        background: var(--accent);
+        opacity: 0.7;
+      }
+
+      /* ── Benefits ── */
+      #benefits {
+        padding: 120px 0;
+        position: relative;
+      }
+      .benefits-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .benefits-list {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+      .benefit {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        padding: 24px;
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: var(--transition);
+      }
+      .benefit:hover {
+        border-color: rgba(108, 71, 255, 0.3);
+        background: rgba(108, 71, 255, 0.07);
+      }
+      .benefit-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+      .benefit-title {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .benefit-desc {
+        font-size: 0.88rem;
+        color: var(--muted-2);
+        line-height: 1.6;
+      }
+      .stats-side {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .stat-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+      }
+      .stat-card::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        right: -40px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        opacity: 0.15;
+      }
+      .stat-num {
+        font-family: "Syne", sans-serif;
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--white), var(--accent-glow));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 0.9rem;
+        color: var(--muted-2);
+        margin-top: 6px;
+      }
+
+      /* ── Pricing ── */
+      #pricing {
+        padding: 120px 0;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(60, 240, 197, 0.03) 50%,
+          transparent 100%
+        );
+      }
+      .pricing-head {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 64px;
+      }
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        align-items: start;
+      }
+      .price-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        padding: 36px 28px;
+        position: relative;
+        transition: var(--transition);
+        overflow: hidden;
+      }
+      .price-card.popular {
+        background: linear-gradient(
+          145deg,
+          rgba(108, 71, 255, 0.25) 0%,
+          rgba(60, 240, 197, 0.08) 100%
+        );
+        border-color: rgba(108, 71, 255, 0.5);
+        transform: scale(1.04);
+      }
+      .popular-badge {
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 5px 18px;
+        border-radius: 0 0 12px 12px;
+        color: var(--white);
+      }
+      .plan-name {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+      .plan-price {
+        font-family: "Syne", sans-serif;
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-bottom: 4px;
+        display: flex;
+        align-items: flex-start;
+        gap: 4px;
+        line-height: 1;
+      }
+      .plan-price sup {
+        font-size: 1.2rem;
+        margin-top: 6px;
+      }
+      .plan-price .period {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--muted);
+        align-self: flex-end;
+        margin-bottom: 6px;
+      }
+      .plan-desc {
+        font-size: 0.88rem;
+        color: var(--muted-2);
+        margin-bottom: 28px;
+        line-height: 1.55;
+      }
+      .plan-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .plan-features li {
+        font-size: 0.88rem;
+        color: var(--muted-2);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .plan-features li::before {
+        content: "✓";
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(60, 240, 197, 0.15);
+        color: var(--teal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.72rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .plan-features li.dimmed {
+        color: rgba(255, 255, 255, 0.25);
+      }
+      .plan-features li.dimmed::before {
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.2);
+      }
+      .plan-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* ── Testimonials ── */
+      #testimonials {
+        padding: 120px 0;
+      }
+      .testi-head {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 64px;
+      }
+      .testi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .testi-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        padding: 32px 28px;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+      .testi-card:hover {
+        border-color: rgba(108, 71, 255, 0.3);
+        transform: translateY(-3px);
+      }
+      .testi-stars {
+        color: #ffd700;
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+        letter-spacing: 2px;
+      }
+      .testi-quote {
+        font-size: 0.92rem;
+        color: var(--muted-2);
+        line-height: 1.7;
+        margin-bottom: 24px;
+        font-style: italic;
+      }
+      .testi-author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .testi-av {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        border: 2px solid rgba(108, 71, 255, 0.3);
+      }
+      .testi-name {
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+      .testi-role {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .testi-platform {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 3px 9px;
+        border-radius: 6px;
+      }
+
+      /* ── Final CTA ── */
+      #cta {
+        padding: 120px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 70% 80% at 50% 50%,
+            rgba(108, 71, 255, 0.2) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 40% at 80% 20%,
+            rgba(60, 240, 197, 0.1) 0%,
+            transparent 55%
+          );
+      }
+      .cta-inner {
+        position: relative;
+        z-index: 1;
+      }
+      .cta-title {
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+      .cta-title span {
+        background: linear-gradient(
+          100deg,
+          var(--accent-glow) 0%,
+          var(--teal) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .cta-sub {
+        font-size: 1.05rem;
+        color: var(--muted-2);
+        max-width: 480px;
+        margin: 0 auto 40px;
+        line-height: 1.7;
+      }
+      .cta-actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .cta-note {
+        margin-top: 18px;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .cta-note span {
+        color: var(--teal);
+      }
+
+      /* ── Footer ── */
+      footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 60px 0 36px;
+      }
+      .footer-inner {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+      }
+      .footer-brand p {
+        font-size: 0.88rem;
+        color: var(--muted-2);
+        line-height: 1.65;
+        margin-top: 14px;
+        max-width: 260px;
+      }
+      .footer-col h5 {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+      .footer-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .footer-col a {
+        color: var(--muted-2);
+        text-decoration: none;
+        font-size: 0.88rem;
+        transition: color var(--transition);
+      }
+      .footer-col a:hover {
+        color: var(--white);
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .footer-bottom p {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .footer-socials {
+        display: flex;
+        gap: 12px;
+      }
+      .soc-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        text-decoration: none;
+        color: var(--muted-2);
+        transition: var(--transition);
+      }
+      .soc-btn:hover {
+        background: rgba(108, 71, 255, 0.2);
+        border-color: rgba(108, 71, 255, 0.4);
+        color: var(--white);
+      }
+
+      /* ── Animations ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.96);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1.12);
+          opacity: 0;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 1024px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feat-card.highlight {
+          grid-column: span 1;
+        }
+        .testi-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer-inner {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+        .hero-visual {
+          display: none;
+        }
+        .steps-row {
+          grid-template-columns: 1fr;
+        }
+        .steps-row::before {
+          display: none;
+        }
+        .showcase-inner {
+          grid-template-columns: 1fr;
+        }
+        .benefits-wrap {
+          grid-template-columns: 1fr;
+        }
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+        .price-card.popular {
+          transform: scale(1);
+        }
+        .testi-grid {
+          grid-template-columns: 1fr;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── NAV ── -->
+    <nav>
+      <div class="container">
+        <div class="nav-inner">
+          <a href="#" class="logo">
+            <div class="logo-mark">L</div>
+            Lystra
+          </a>
+          <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#showcase">AI Visuals</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+          <div class="nav-cta">
+            <a
+              href="#"
+              class="btn btn-ghost"
+              style="padding: 10px 22px; font-size: 0.85rem"
+              >Sign In</a
+            >
+            <a
+              href="#"
+              class="btn btn-primary"
+              style="padding: 10px 22px; font-size: 0.85rem"
+              >Start Free</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-grid-lines"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="tag">AI-Powered · Fashion Commerce</span>
+            </div>
+            <h1 class="hero-headline">
+              Turn Product Photos<br />into <span>High-Converting</span
+              ><br />Listings Instantly
+            </h1>
+            <p class="hero-desc">
+              Lystra uses AI to generate SEO-optimized titles, descriptions, and
+              professional product images — in seconds. Built for fashion
+              sellers on Shopify, Amazon, and Daraz.
+            </p>
+            <div class="hero-actions">
+              <a href="#" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M8 1l1.9 5.8H16l-4.9 3.6 1.9 5.8L8 12.6l-5 3.6 1.9-5.8L0 6.8h6.1L8 1z"
+                    fill="white"
+                  />
+                </svg>
+                Start Free Trial
+              </a>
+              <a href="#how" class="btn btn-ghost"> See How It Works → </a>
+            </div>
+            <div class="hero-proof">
+              <div class="avatar-stack">
+                <div
+                  class="av"
+                  style="background: linear-gradient(135deg, #6c47ff, #9b71ff)"
+                >
+                  AS
+                </div>
+                <div
+                  class="av"
+                  style="background: linear-gradient(135deg, #3cf0c5, #6c47ff)"
+                >
+                  MR
+                </div>
+                <div
+                  class="av"
+                  style="background: linear-gradient(135deg, #ff5f87, #ff8c57)"
+                >
+                  ZK
+                </div>
+                <div
+                  class="av"
+                  style="background: linear-gradient(135deg, #b8ff57, #3cf0c5)"
+                >
+                  FK
+                </div>
+              </div>
+              <div class="proof-text">
+                <div class="stars">★★★★★</div>
+                Loved by <strong>2,400+</strong> fashion sellers
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="float-chip chip-1">✨ AI Enhanced</div>
+            <div class="float-chip chip-2">⚡ 3s Generation</div>
+            <div class="mockup-card">
+              <div class="mockup-topbar">
+                <span class="dot dot-r"></span>
+                <span class="dot dot-y"></span>
+                <span class="dot dot-g"></span>
+                <span class="mockup-label">lystra.ai · dashboard</span>
+              </div>
+              <div class="before-after">
+                <div class="ba-panel ba-before">
+                  <div class="ba-img">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                      <rect
+                        x="18"
+                        y="8"
+                        width="28"
+                        height="48"
+                        rx="4"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-dasharray="4 3"
+                      />
+                      <circle
+                        cx="32"
+                        cy="24"
+                        r="6"
+                        stroke="white"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M18 40 L28 30 L36 38 L44 28"
+                        stroke="white"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </div>
+                  <span class="ba-tag">Before</span>
+                </div>
+                <div class="ba-panel ba-after">
+                  <div class="ba-img">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                      <rect
+                        x="18"
+                        y="8"
+                        width="28"
+                        height="48"
+                        rx="4"
+                        stroke="#9b71ff"
+                        stroke-width="2"
+                      />
+                      <circle
+                        cx="32"
+                        cy="24"
+                        r="6"
+                        stroke="#3cf0c5"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M18 40 L28 30 L36 38 L44 28"
+                        stroke="#b8ff57"
+                        stroke-width="2"
+                      />
+                      <circle
+                        cx="50"
+                        cy="14"
+                        r="4"
+                        fill="#b8ff57"
+                        opacity=".8"
+                      />
+                    </svg>
+                  </div>
+                  <span class="ba-tag">After AI</span>
+                  <span class="ai-badge">AI ✦</span>
+                </div>
+              </div>
+              <div class="listing-block">
+                <div class="listing-row">
+                  <span class="listing-key">Title</span>
+                  <span class="listing-val title typing-cursor"
+                    >Women's Oversized Linen Blazer — Beige</span
+                  >
+                </div>
+                <div class="listing-row">
+                  <span class="listing-key">Keywords</span>
+                  <span class="listing-val"
+                    >linen blazer, oversized coat, office wear, summer
+                    fashion</span
+                  >
+                </div>
+                <div class="listing-row">
+                  <span class="listing-key">Season</span>
+                  <span class="listing-val"
+                    >Spring / Summer · Peak: Apr–Jun</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FEATURES ── -->
+    <section id="features">
+      <div class="container">
+        <div class="features-head reveal">
+          <span class="tag">Core Features</span>
+          <h2 class="section-title">
+            Everything You Need to<br />Sell More, Faster
+          </h2>
+          <p class="section-sub">
+            From listing copy to enhanced visuals — Lystra handles the hard
+            parts so you can focus on growing your store.
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feat-card highlight reveal">
+            <div
+              class="feat-icon icon-purple"
+              style="width: 56px; height: 56px; font-size: 1.7rem"
+            >
+              ✦
+            </div>
+            <div class="feat-title" style="font-size: 1.3rem">
+              AI Image Enhancement
+            </div>
+            <div class="feat-desc" style="max-width: 480px">
+              Upload any raw product photo and Lystra's AI generates
+              studio-quality images — clean backgrounds, styled visuals, and
+              platform-ready output. No photographer needed.
+            </div>
+            <div class="feat-pills">
+              <span class="pill">Clean Background</span>
+              <span class="pill">Styled Visuals</span>
+              <span class="pill">Platform-Ready</span>
+              <span class="pill">Batch Processing</span>
+            </div>
+          </div>
+
+          <div class="feat-card reveal">
+            <div class="feat-icon icon-teal">📝</div>
+            <div class="feat-title">AI Listing Generator</div>
+            <div class="feat-desc">
+              Generate SEO-optimized titles, high-converting product
+              descriptions, and targeted keywords from a single product image
+              upload.
+            </div>
+          </div>
+
+          <div class="feat-card reveal">
+            <div class="feat-icon icon-rose">📊</div>
+            <div class="feat-title">Market & Competitor Insights</div>
+            <div class="feat-desc">
+              Discover what keywords your competitors rank for, price range
+              benchmarks, and listing optimization opportunities in your niche.
+            </div>
+          </div>
+
+          <div class="feat-card reveal">
+            <div class="feat-icon icon-lime">🎯</div>
+            <div class="feat-title">Audience Identification</div>
+            <div class="feat-desc">
+              Get AI-generated buyer personas and ideal customer demographics to
+              sharpen your ad targeting on Facebook, TikTok, and Google.
+            </div>
+          </div>
+
+          <div class="feat-card reveal">
+            <div class="feat-icon icon-gold">📅</div>
+            <div class="feat-title">Seasonal Recommendations</div>
+            <div class="feat-desc">
+              Know exactly when to push your products. Lystra predicts peak
+              selling seasons so you can plan inventory and campaigns ahead of
+              time.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section id="how">
+      <div class="container">
+        <div class="how-head reveal">
+          <span class="tag">How It Works</span>
+          <h2 class="section-title">
+            From Photo to Published<br />in Three Steps
+          </h2>
+          <p class="section-sub">
+            No technical knowledge required. If you can upload a photo, you can
+            use Lystra.
+          </p>
+        </div>
+        <div class="steps-row">
+          <div class="step reveal">
+            <div class="step-num">1</div>
+            <h3 class="step-title">Upload Your Product Image</h3>
+            <p class="step-desc">
+              Drag and drop any product photo — phone snap or studio shot.
+              Lystra accepts JPG, PNG, and WEBP formats instantly.
+            </p>
+          </div>
+          <div class="step reveal" style="transition-delay: 0.1s">
+            <div class="step-num">2</div>
+            <h3 class="step-title">AI Analyzes Your Product</h3>
+            <p class="step-desc">
+              Our vision model identifies product type, style, material, color,
+              and context — then cross-references market data to craft the
+              perfect listing.
+            </p>
+          </div>
+          <div class="step reveal" style="transition-delay: 0.2s">
+            <div class="step-num">3</div>
+            <h3 class="step-title">Get Listings + Enhanced Images</h3>
+            <p class="step-desc">
+              Receive SEO-ready copy, competitor keywords, audience insights,
+              and a professionally enhanced product image — all ready to
+              publish.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SHOWCASE ── -->
+    <section id="showcase">
+      <div class="container">
+        <div class="showcase-inner">
+          <div class="reveal">
+            <div class="showcase-label">AI Image Enhancement</div>
+            <h2 class="showcase-title">
+              Incredible Product Images.<br />Zero Studio Budget.
+            </h2>
+            <p class="showcase-desc">
+              Lystra's image AI transforms raw product photos into
+              scroll-stopping visuals. Clean white backgrounds, lifestyle
+              mockups, or styled scene compositions — all generated
+              automatically.
+            </p>
+            <div class="showcase-perks">
+              <div class="perk">
+                <div class="perk-icon">🗑️</div>
+                Remove messy backgrounds instantly
+              </div>
+              <div class="perk">
+                <div class="perk-icon">🎨</div>
+                Generate lifestyle scene compositions
+              </div>
+              <div class="perk">
+                <div class="perk-icon">📐</div>
+                Auto-crop and optimize for each platform
+              </div>
+              <div class="perk">
+                <div class="perk-icon">⚡</div>
+                Output ready for Shopify, Amazon, Daraz
+              </div>
+            </div>
+            <a href="#" class="btn btn-lime">Try Image AI Free →</a>
+          </div>
+          <div class="ba-showcase reveal" style="transition-delay: 0.15s">
+            <div class="ba-s-panel ba-s-before">
+              <div class="ba-s-img">
+                <div class="product-placeholder">
+                  <div
+                    class="product-shape"
+                    style="
+                      width: 110px;
+                      height: 150px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 3rem;
+                    "
+                  >
+                    👗
+                  </div>
+                </div>
+              </div>
+              <div class="ba-s-label"><span>Original Photo</span></div>
+            </div>
+            <div class="ba-s-panel ba-s-after">
+              <div class="ba-s-img">
+                <div class="product-placeholder">
+                  <div
+                    class="product-shape"
+                    style="
+                      width: 110px;
+                      height: 150px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 3rem;
+                    "
+                  >
+                    ✨
+                  </div>
+                  <div class="sparkle-bar">
+                    <div class="sbar" style="width: 36px"></div>
+                    <div
+                      class="sbar"
+                      style="width: 24px; background: var(--teal)"
+                    ></div>
+                    <div
+                      class="sbar"
+                      style="width: 48px; background: var(--lime)"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="ba-s-label"><span>AI Enhanced</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BENEFITS ── -->
+    <section id="benefits">
+      <div class="container">
+        <div class="benefits-wrap">
+          <div>
+            <span class="tag reveal">Why Lystra?</span>
+            <h2 class="section-title reveal" style="margin: 20px 0 40px">
+              Built for Sellers<br />Who Move Fast
+            </h2>
+            <div class="benefits-list">
+              <div class="benefit reveal">
+                <div class="benefit-icon icon-purple">⏱️</div>
+                <div>
+                  <div class="benefit-title">Save Hours Every Week</div>
+                  <div class="benefit-desc">
+                    Writing one listing takes 45 minutes on average. With
+                    Lystra, you get a complete listing in under 10 seconds. Do
+                    50 listings in the time it takes to do one.
+                  </div>
+                </div>
+              </div>
+              <div class="benefit reveal">
+                <div class="benefit-icon icon-teal">📈</div>
+                <div>
+                  <div class="benefit-title">Increase Sales Conversions</div>
+                  <div class="benefit-desc">
+                    AI-written copy trained on top-performing listings means
+                    better click-through rates, more add-to-carts, and higher
+                    revenue per product.
+                  </div>
+                </div>
+              </div>
+              <div class="benefit reveal">
+                <div class="benefit-icon icon-lime">🔍</div>
+                <div>
+                  <div class="benefit-title">Rank Higher with Better SEO</div>
+                  <div class="benefit-desc">
+                    Every title and description is optimized with the right
+                    keywords for your platform — Shopify, Amazon, or Daraz — to
+                    maximize organic visibility.
+                  </div>
+                </div>
+              </div>
+              <div class="benefit reveal">
+                <div class="benefit-icon icon-rose">🖼️</div>
+                <div>
+                  <div class="benefit-title">
+                    Professional Product Presentation
+                  </div>
+                  <div class="benefit-desc">
+                    Enhanced product images build customer trust. Clean
+                    backgrounds and styled visuals make your store look premium
+                    — even on a bootstrap budget.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stats-side">
+            <div class="stat-card reveal">
+              <div class="stat-num">10x</div>
+              <div class="stat-label">
+                Faster listing creation vs manual writing
+              </div>
+            </div>
+            <div class="stat-card reveal" style="transition-delay: 0.1s">
+              <div class="stat-num">38%</div>
+              <div class="stat-label">
+                Average increase in CTR with AI-enhanced images
+              </div>
+            </div>
+            <div class="stat-card reveal" style="transition-delay: 0.2s">
+              <div class="stat-num">2,400+</div>
+              <div class="stat-label">
+                Sellers across Shopify, Amazon & Daraz
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRICING ── -->
+    <section id="pricing">
+      <div class="container">
+        <div class="pricing-head reveal">
+          <span class="tag">Pricing</span>
+          <h2 class="section-title">Simple, Transparent Pricing</h2>
+          <p class="section-sub">
+            Start free. Scale as you grow. No hidden fees, cancel anytime.
+          </p>
+        </div>
+        <div class="pricing-grid">
+          <!-- Free -->
+          <div class="price-card reveal">
+            <div class="plan-name">Free</div>
+            <div class="plan-price">
+              <span>$0</span><span class="period">/mo</span>
+            </div>
+            <div class="plan-desc">
+              Perfect for testing the waters. No credit card required.
+            </div>
+            <ul class="plan-features">
+              <li>5 AI listings / month</li>
+              <li>2 image enhancements</li>
+              <li>Basic SEO keywords</li>
+              <li class="dimmed">Competitor insights</li>
+              <li class="dimmed">Audience identification</li>
+              <li class="dimmed">Seasonal recommendations</li>
+            </ul>
+            <a href="#" class="btn btn-ghost plan-btn">Get Started Free</a>
+          </div>
+          <!-- Basic -->
+          <div class="price-card popular reveal" style="transition-delay: 0.1s">
+            <div class="popular-badge">Most Popular</div>
+            <div class="plan-name" style="margin-top: 14px">Basic</div>
+            <div class="plan-price">
+              <sup>$</sup><span>29</span><span class="period">/mo</span>
+            </div>
+            <div class="plan-desc">
+              For active sellers ready to scale their listings and visuals.
+            </div>
+            <ul class="plan-features">
+              <li>100 AI listings / month</li>
+              <li>50 image enhancements</li>
+              <li>Advanced SEO keywords</li>
+              <li>Competitor insights</li>
+              <li>Audience identification</li>
+              <li class="dimmed">Seasonal recommendations</li>
+            </ul>
+            <a href="#" class="btn btn-primary plan-btn">Start Free Trial</a>
+          </div>
+          <!-- Pro -->
+          <div class="price-card reveal" style="transition-delay: 0.2s">
+            <div class="plan-name">Pro</div>
+            <div class="plan-price">
+              <sup>$</sup><span>79</span><span class="period">/mo</span>
+            </div>
+            <div class="plan-desc">
+              For serious fashion brands and high-volume dropshippers.
+            </div>
+            <ul class="plan-features">
+              <li>Unlimited AI listings</li>
+              <li>Unlimited image enhancements</li>
+              <li>Advanced SEO + bulk export</li>
+              <li>Competitor insights</li>
+              <li>Audience identification</li>
+              <li>Seasonal recommendations</li>
+            </ul>
+            <a href="#" class="btn btn-ghost plan-btn">Go Pro</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TESTIMONIALS ── -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="testi-head reveal">
+          <span class="tag">Testimonials</span>
+          <h2 class="section-title">Sellers Love Lystra</h2>
+          <p class="section-sub">
+            Real results from real fashion sellers using Lystra every day.
+          </p>
+        </div>
+        <div class="testi-grid">
+          <div class="testi-card reveal">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-platform">Shopify</div>
+            <p class="testi-quote">
+              "I used to spend entire Sunday evenings writing listings. Lystra
+              cut that to 15 minutes for my entire new collection. The AI
+              descriptions honestly convert better than what I wrote manually."
+            </p>
+            <div class="testi-author">
+              <div
+                class="testi-av"
+                style="background: linear-gradient(135deg, #6c47ff, #9b71ff)"
+              >
+                AS
+              </div>
+              <div>
+                <div class="testi-name">Ayesha Siddiqui</div>
+                <div class="testi-role">Owner, Aura Closet · Lahore</div>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card reveal" style="transition-delay: 0.1s">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-platform">Amazon</div>
+            <p class="testi-quote">
+              "The image enhancement feature is insane. My product photos look
+              like they came out of a studio. Sales went up 40% the week after I
+              switched to Lystra's AI-generated images."
+            </p>
+            <div class="testi-author">
+              <div
+                class="testi-av"
+                style="background: linear-gradient(135deg, #3cf0c5, #6c47ff)"
+              >
+                MR
+              </div>
+              <div>
+                <div class="testi-name">Muhammad Raza</div>
+                <div class="testi-role">Dropshipper · Karachi</div>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card reveal" style="transition-delay: 0.2s">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-platform">Daraz</div>
+            <p class="testi-quote">
+              "As a small brand on Daraz, I couldn't afford a copywriter or
+              photographer. Lystra is both. The competitor keyword tool helped
+              me rank on the first page within two weeks."
+            </p>
+            <div class="testi-author">
+              <div
+                class="testi-av"
+                style="background: linear-gradient(135deg, #b8ff57, #3cf0c5)"
+              >
+                FK
+              </div>
+              <div>
+                <div class="testi-name">Fatima Khan</div>
+                <div class="testi-role">
+                  Founder, Minimal Thread · Islamabad
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FINAL CTA ── -->
+    <section id="cta">
+      <div class="cta-bg"></div>
+      <div class="container">
+        <div class="cta-inner">
+          <div class="reveal">
+            <h2 class="cta-title">
+              Ready to Generate Listings<br /><span>in Seconds?</span>
+            </h2>
+            <p class="cta-sub">
+              Join 2,400+ fashion sellers who are saving time, improving SEO,
+              and selling more with Lystra.
+            </p>
+            <div class="cta-actions">
+              <a
+                href="#"
+                class="btn btn-lime"
+                style="font-size: 1rem; padding: 16px 36px"
+              >
+                ✦ Start Free Trial
+              </a>
+              <a
+                href="#"
+                class="btn btn-ghost"
+                style="font-size: 1rem; padding: 16px 36px"
+              >
+                See Demo
+              </a>
+            </div>
+            <p class="cta-note">
+              No credit card required · <span>5 free listings</span> · Cancel
+              anytime
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <a href="#" class="logo">
+              <div class="logo-mark">L</div>
+              Lystra
+            </a>
+            <p>
+              AI-powered product listings and visuals for fashion sellers. Built
+              for Shopify, Amazon, and Daraz.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h5>Product</h5>
+            <ul>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">API Access</a></li>
+              <li><a href="#">Changelog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Company</h5>
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Legal</h5>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">GDPR</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Lystra Technologies. All rights reserved.</p>
+          <div class="footer-socials">
+            <a href="#" class="soc-btn" aria-label="Twitter">𝕏</a>
+            <a href="#" class="soc-btn" aria-label="Instagram">📸</a>
+            <a href="#" class="soc-btn" aria-label="LinkedIn">in</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Scroll reveal
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => entry.target.classList.add("visible"), i * 60);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      );
+      reveals.forEach((el) => observer.observe(el));
+
+      // Nav scroll effect
+      const nav = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        nav.style.borderBottomColor =
+          window.scrollY > 60 ? "rgba(108,71,255,.2)" : "rgba(255,255,255,.06)";
+      });
+    </script>
+  </body>
+</html>
